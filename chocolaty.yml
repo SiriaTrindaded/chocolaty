@@ -1,9 +1,11 @@
 ---
-- name: Instalar um aplicativo no Windows via Ansible
+- name: Instalar Aplicação no Windows
   hosts: windows
   gather_facts: no
+  collections:
+    - ansible.windows
+
   tasks:
-  
     - name: Instalar Chocolatey (se não estiver instalado)
       ansible.windows.win_shell: |
         Set-ExecutionPolicy Bypass -Scope Process -Force
@@ -14,12 +16,5 @@
       args:
         executable: powershell.exe
 
-    - name: Instalar Google Chrome via Chocolatey
-      ansible.windows.win_chocolatey:
-        name: googlechrome
-        state: present
-      register: chrome_result
+    - name:
 
-    - name: Exibir saída da instalação do Chrome
-      debug:
-        var: chrome_result
